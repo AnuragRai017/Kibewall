@@ -24,9 +24,9 @@ import { useMobile } from "@/hooks/use-mobile"
 
 const formSchema = z.object({
   q: z.string().optional(),
-  categories: z.string().default("010"),
-  sorting: z.string().default("date_added"),
-  purity: z.string().default("100"),
+  categories: z.string(),
+  sorting: z.string(),
+  purity: z.string(),
 })
 
 export default function SearchFilters({

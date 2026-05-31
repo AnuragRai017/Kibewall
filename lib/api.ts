@@ -18,7 +18,7 @@ export const fetchWallpapers = cache(async ({
   purity?: string
 }): Promise<SearchResponse> => {
   const params = new URLSearchParams({
-    apikey: API_KEY,
+    apikey: API_KEY!,
     page: page.toString(),
     categories,
     sorting,
