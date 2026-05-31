@@ -1,33 +1,73 @@
-# v0-next-js-anime-app
+# KibeWall
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [v0](https://v0.app).
+Anime wallpaper browsing and downloading gallery. Pulls high-quality wallpapers from the [Wallhaven.cc API](https://wallhaven.cc) with a modern, responsive UI.
 
-## Built with v0
+## Features
 
-This repository is linked to a [v0](https://v0.app) project. You can continue developing by visiting the link below -- start new chats to make changes, and v0 will push commits directly to this repo. Every merge to `main` will automatically deploy.
+- **Browse & Search** — Filter by category (Anime/General/People), sort by popularity, date, views, favorites
+- **Wallpaper Detail** — Full metadata, color palette, tags, download links, social share
+- **Dark/Light Mode** — System-aware theming via next-themes
+- **Responsive** — Mobile-first layout with sheet-based filters
+- **SEO Optimized** — Per-page metadata, Open Graph, Twitter Cards, JSON-LD structured data, sitemap, robots.txt
+- **ISR Caching** — 1-hour page revalidation with on-demand purge endpoint
 
-[Continue working on v0 →](https://v0.app/chat/projects/prj_45sOk8xyRDwcs43ocWcONowgW1T8)
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | Next.js 15 (App Router) |
+| UI | React 19, shadcn/ui, Radix UI |
+| Styling | Tailwind CSS v3, CSS variables |
+| Animations | Framer Motion |
+| Icons | Lucide React |
+| Forms | react-hook-form + Zod |
+| API | Wallhaven.cc API v1 |
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install --legacy-peer-deps
+
+# Set up environment
+cp .env.example .env.local
+# Edit .env.local and add your Wallhaven API key
+
+# Run dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-## Learn More
+| Variable | Description |
+|----------|-------------|
+| `WALLHAVEN_API_KEY` | Wallhaven.cc API key (get yours at [wallhaven.cc/settings/account](https://wallhaven.cc/settings/account)) |
 
-To learn more, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [v0 Documentation](https://v0.app/docs) - learn about v0 and how to use it.
+```
+├── app/
+│   ├── api/
+│   │   ├── top-wallpapers/route.ts   # Hero background proxy
+│   │   └── revalidate/route.ts       # On-demand ISR purge
+│   ├── explore/page.tsx              # Browse/search page
+│   ├── wallpaper/[id]/page.tsx       # Detail page
+│   ├── categories/page.tsx           # Category cards
+│   ├── robots.ts                     # robots.txt
+│   ├── sitemap.ts                    # sitemap.xml
+│   └── layout.tsx                    # Root layout + metadata
+├── components/
+│   ├── animated-wallpaper-card.tsx   # Grid card with hover effects
+│   ├── hero-section.tsx              # Rotating background hero
+│   ├── wallpaper-grid.tsx            # Server-rendered grid
+│   ├── search-filters.tsx            # Filter form
+│   ├── pagination.tsx                # Page navigation
+│   └── ui/                           # shadcn/ui components
+├── lib/
+│   ├── api.ts                        # Wallhaven API client (cached)
+│   ├── types.ts                      # TypeScript interfaces
+│   └── utils.ts                      # cn() utility
+└── public/                           # Static assets + favicons
+```
