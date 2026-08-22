@@ -1,0 +1,13 @@
+{
+  "expo": {
+    "name": "KibeWall",
+    "slug": "kibewall",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "scheme": "kibewall",
+    "plugins": ["expo-router", "expo-media-library"],
+    "android": { "package": "com.kibewall.app", "permissions": ["READ_MEDIA_IMAGES", "WRITE_EXTERNAL_STORAGE"] },
+    "experiments": { "typedRoutes": true }
+  }
+}

@@ -1,0 +1,4 @@
+export type Wallpaper = { id:string; url:string; path:string; resolution:string; favorites:number; views:number; category:string; ratio:string; colors:string[]; thumbs:{large:string; original:string; small:string}; tags?: {name:string}[] }
+export const API_BASE = process.env.EXPO_PUBLIC_API_URL || "http://localhost:3000"
+export async function searchWallpapers(q = "", sorting = "date_added") { const res = await fetch(`${API_BASE}/api/mobile/search?q=${encodeURIComponent(q)}&sorting=${sorting}`); if (!res.ok) throw new Error("Unable to load wallpapers"); return (await res.json()) as {data:Wallpaper[]; meta:{last_page:number}} }
+export async function getWallpaper(id:string) { const res = await fetch(`${API_BASE}/api/mobile/wallpaper/${id}`); if (!res.ok) throw new Error("Wallpaper not found"); return (await res.json()).data as Wallpaper }
